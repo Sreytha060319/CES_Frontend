@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="bg-white p-4 rounded-lg shadow">
     <h2 class="text-xl font-bold mb-4 text-pink-800">Calendar</h2>
     <FullCalendar :options="calendarOptions" />
@@ -26,4 +26,4 @@ const calendarOptions = {
   --fc-event-border-color: #f97316;
   --fc-event-text-color: #fff;
 }
-</style>
+</style> -->

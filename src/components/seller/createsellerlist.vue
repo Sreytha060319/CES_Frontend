@@ -1,32 +1,18 @@
-seller lis==
 <template>
   <div class="sellers-page">
-    <div class="bg-white p-6 rounded-lg shadow-md">
-      <header class="pb-6 border-b border-gray-200">
-        <h1 class="text-2xl font-bold text-gray-800">Seller</h1>
-        <div class="mt-4 flex flex-col md:flex-row items-start md:items-center justify-between">
-          
-          <!-- Search Bar -->
-          <div class="relative w-full md:w-1/3">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-              </svg>
-            </div>
-            <input 
-              v-model="searchQuery"
-              type="text" 
-              placeholder="Search Seller..." 
-              class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
+    <div class="sellers-container">
+      <header class="sellers-header">
+        <h1 class="title">Sellers</h1>
+        <div class="actions">
+          <div class="search-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" placeholder="Search Seller..." class="search-input" />
           </div>
-
-          <!-- Add Category Button -->
-     <button class="add-btn" @click="isModalOpen = true">
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> -->
+          <!-- This button triggers the modal -->
+          <button class="add-btn" @click="isModalOpen = true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             <span>Add New Seller</span>
           </button>
-
         </div>
       </header>
 
@@ -73,17 +59,11 @@ seller lis==
           </tbody>
         </table>
       </div>
-       <div class="flex items-center justify-center pt-6">
-        <nav class="flex items-center space-x-2">
-          <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1" class="p-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100">
-            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
-          </button>
-          <span class="px-4 py-2 text-sm font-medium bg-blue-500 text-white rounded-md">{{ currentPage }}</span>
-          <button @click="changePage(currentPage + 1)" :disabled="currentPage >= totalPages" class="p-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100">
-            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
-          </button>
-        </nav>
-      </div>
+       <footer class="pagination-footer">
+        <button class="pagination-btn"><</button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">></button>
+      </footer>
     </div>
 
     <!-- Add New Seller Modal -->

@@ -160,7 +160,7 @@ const login = async () => {
       sessionStorage.setItem('id', id);
 
       const redirectPath = role === 'admin' ? '/admin' :
-        role === 'seller' ? '/admin' : '/dashboard';
+        role === 'seller' ? '/seller' : '/home';
       router.push(redirectPath);
     } else {
       alert('Authentication failed: No token received');

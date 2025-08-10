@@ -4,8 +4,10 @@
       <!-- Header Section -->
       <div class="sm:flex sm:items-center sm:justify-between mb-8">
         <div class="mb-4 sm:mb-0">
+          <router-link to="/admin/order/Invoice">
           <h1 class="text-3xl font-bold text-gray-900">Order History</h1>
           <p class="mt-1 text-sm text-gray-500">Invoice #{{ invoiceNumber }}</p>
+          </router-link>
         </div>
         <button class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md">
           <i class="fas fa-print mr-2"></i>

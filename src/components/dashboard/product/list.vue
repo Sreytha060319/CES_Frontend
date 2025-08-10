@@ -58,7 +58,7 @@ const availableColumns = [
   { key: 'createdAt', name: 'Create at', defaultVisible: true, sortKey: 'createdAt' },
   { key: 'stock', name: 'Stock', defaultVisible: true, sortKey: 'stock' },
   { key: 'price', name: 'Price', defaultVisible: true, sortKey: 'price' },
-  { key: 'publish', name: 'Publish', defaultVisible: true, sortKey: 'status' },
+  // { key: 'publish', name: 'Publish', defaultVisible: true, sortKey: 'status' },
   { key: 'action', name: 'Action', defaultVisible: true },
 ];
 
@@ -105,7 +105,7 @@ const filterColumnOptions = [
   { key: 'createdAt', name: 'Create at', type: 'date' },
   { key: 'stock', name: 'Stock', type: 'number' },
   { key: 'price', name: 'Price', type: 'number' },
-  { key: 'status', name: 'Publish Status', type: 'string' },
+  // { key: 'status', name: 'Publish Status', type: 'string' },
 ];
 
 const operatorGroups = {
@@ -568,6 +568,7 @@ const getStockBarColorClass = (stock) => {
 
 const getPublishStatusClass = (status) => {
   return status === 'Published' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800';
+  
 };
 
 const formatDate = (isoString) => {
@@ -662,7 +663,7 @@ const getInputValueType = (columnKey) => {
         </div>
 
         <!-- Publish Filter - Custom Dropdown -->
-        <div class="relative publish-dropdown-container" ref="publishFilterRef">
+        <!-- <div class="relative publish-dropdown-container" ref="publishFilterRef">
           <button
             @click="togglePublishDropdown"
             class="flex items-center justify-between w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md leading-tight focus:outline-none focus:bg-white focus:border-blue-500 text-sm appearance-none cursor-pointer min-w-[120px]"
@@ -692,7 +693,7 @@ const getInputValueType = (columnKey) => {
               <button @click="applyPublishFilter" class="px-3 py-1 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700">Apply</button>
             </div>
           </div>
-        </div>
+        </div> -->
 
          <div class="relative w-full md:w-1/3">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -978,12 +979,11 @@ const getInputValueType = (columnKey) => {
               </div>
               <div>
                 <div class="text-base font-semibold text-gray-900">{{ product.name }}</div>
-                <div class="text-xs text-gray-500">{{ product.category }}</div>
               </div>
             </td>
             <td class="py-4 px-6" v-if="visibleColumns.includes('createdAt')">
-              <div class="font-semibold mb-0.5">{{ formatDate(product.createdAt) }}</div>
-              <div class="text-xs text-gray-500">{{ formatTime(product.createdAt) }}</div>
+              <div class="font-semibold mb-0.5">{{ formatDate(product.created_at) }}</div>
+              <div class="text-xs text-gray-500">{{ formatTime(product.created_at) }}</div>
             </td>
             <td class="py-4 px-6" v-if="visibleColumns.includes('stock')">
               <div class="flex flex-col items-start gap-1">
@@ -1004,50 +1004,30 @@ const getInputValueType = (columnKey) => {
               </span>
             </td>
             <!-- Action buttons for each row -->
-            <td class="py-4 px-6 whitespace-nowrap text-center" v-if="visibleColumns.includes('action')">
-              <div class="inline-flex space-x-2">
-                <!-- View Button -->
-                <button
-                  @click="handleView(product.id)"
-                  title="View"
-                  class="inline-flex items-center p-2 text-sm font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors duration-200"
-                >
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      d="M10 3.5C5.5 3.5 1.73 7.11 1 10c.73 2.89 4.5 6.5 9 6.5s8.27-3.61 9-6.5c-.73-2.89-4.5-6.5-9-6.5zm0 10a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"
-                    />
-                  </svg>
-                </button>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+  <div class="inline-flex items-center space-x-4">
+    
+   
 
-                <!-- Edit Button -->
-                <button
-                  @click="handleEdit(product.id)"
-                  title="Edit"
-                  class="inline-flex items-center p-2 text-sm font-medium text-yellow-600 bg-yellow-100 rounded-lg hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-colors duration-200"
-                >
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      d="M17.414 2.586a2 2 0 010 2.828L8.121 14.707a1 1 0 01-.293.207l-4 2a1 1 0 01-1.32-1.32l2-4a1 1 0 01.207-.293l9.293-9.293a2 2 0 012.828 0z"
-                    />
-                  </svg>
-                </button>
+    <!-- Edit Button -->
+    <button
+      @click="handleEdit(product.id)"
+      title="Edit"
+      class="text-yellow-600 hover:text-yellow-800 transition duration-150 ease-in-out transform hover:scale-105"
+    >
+      <i class="fas fa-edit mr-1"></i> Edit
+    </button>
 
-                <!-- Delete Button -->
-               <button
-                  @click="handleDelete(product.id)"
-                  title="Delete"
-                  class="inline-flex items-center p-2 text-sm font-medium text-red-600 bg-red-100 rounded-lg hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-300 transition-colors duration-200"
-                >
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm6 0a1 1 0 01-2 0v6a1 1 0 112 0V8z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </td>
+    <!-- Delete Button -->
+    <button
+      @click="handleDelete(product.id)"
+      title="Delete"
+      class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-150 ease-in-out"
+    >
+      <i class="fas fa-trash mr-1"></i> Delete
+    </button>
+  </div>
+           </td>
           </tr>
           <tr v-if="paginatedProducts.length === 0">
             <td :colspan="visibleColumns.length" class="text-center text-gray-500 italic py-5">No products found matching your criteria.</td>
